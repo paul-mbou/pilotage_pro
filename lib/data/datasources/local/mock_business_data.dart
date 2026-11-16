@@ -1,0 +1,451 @@
+import 'package:pilotage_pro/domain/entities/entities.dart';
+
+/// In-memory mock catalogue used until a real API is wired.
+
+final List<Category> mockCategories = [
+  Category(
+      id: 'cat_1',
+      name: 'Boissons',
+      description: 'Boissons alcoolisées et non alcoolisées'),
+  Category(
+      id: 'cat_2',
+      name: 'Vêtements',
+      description: 'Habillements et accessoires'),
+  Category(id: 'cat_3', name: 'Bijoux', description: 'Bijoux et montres'),
+  Category(
+      id: 'cat_4',
+      name: 'Électronique',
+      description: 'Appareils électroniques'),
+  Category(
+      id: 'cat_5', name: 'Alimentation', description: 'Produits alimentaires'),
+  Category(
+      id: 'cat_6', name: 'Services', description: 'Prestations de service'),
+];
+
+final List<Location> mockLocations = [
+  Location(id: 'loc_1', name: 'Ange Raphaël', address: 'Douala, Cameroun'),
+  Location(id: 'loc_2', name: 'Bonapriso', address: 'Douala, Cameroun'),
+  Location(id: 'loc_3', name: 'Yaoundé Centre', address: 'Yaoundé, Cameroun'),
+];
+
+final List<User> mockUsers = [
+  User(
+      id: 'user_1',
+      name: 'Rostand MOUNGAM',
+      email: 'rostand@pilotage.pro',
+      role: UserRole.admin,
+      locationId: 'loc_1'),
+  User(
+      id: 'user_2',
+      name: 'Marie KOUAM',
+      email: 'marie@pilotage.pro',
+      role: UserRole.caissier,
+      locationId: 'loc_1'),
+  User(
+      id: 'user_3',
+      name: 'Jean TCHINDA',
+      email: 'jean@pilotage.pro',
+      role: UserRole.vendeur,
+      locationId: 'loc_2'),
+  User(
+      id: 'user_4',
+      name: 'Aline FOUDA',
+      email: 'aline@pilotage.pro',
+      role: UserRole.caissier,
+      locationId: 'loc_2'),
+];
+
+// Photos d’illustration (Pexels, licence d’utilisation autorisée) alignées
+// sur chaque fiche. Voir https://www.pexels.com/license/
+String _px(int id) =>
+    'https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg'
+    '?auto=compress&cs=tinysrgb&w=800';
+
+final List<Product> mockProducts = [
+  Product(
+    id: 'prod_1',
+    name: 'Coca-Cola 33cl',
+    description: 'Soda pétillant en bouteille verre 33cl, à servir frais.',
+    categoryId: 'cat_1',
+    purchasePrice: 350,
+    sellingPrice: 500,
+    quantity: 120,
+    safetyStock: 20,
+    unit: 'bouteille',
+    barcode: '5449000000996',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(14650677),
+  ),
+  Product(
+    id: 'prod_2',
+    name: 'Heineken 33cl',
+    description: 'Bière blonde premium, bouteille 33cl.',
+    categoryId: 'cat_1',
+    purchasePrice: 600,
+    sellingPrice: 900,
+    quantity: 80,
+    safetyStock: 15,
+    unit: 'bouteille',
+    barcode: '8712000000121',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(1552630),
+  ),
+  Product(
+    id: 'prod_3',
+    name: 'T-shirt Nike',
+    description: 'Tee-shirt sport coton, coupe standard, idéal pour le sport.',
+    categoryId: 'cat_2',
+    purchasePrice: 5000,
+    sellingPrice: 8500,
+    quantity: 45,
+    safetyStock: 10,
+    unit: 'pièce',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(6311392),
+  ),
+  Product(
+    id: 'prod_4',
+    name: "Jean Levi's",
+    description: 'Jean droit en denim, bleu classique, plusieurs tailles.',
+    categoryId: 'cat_2',
+    purchasePrice: 12000,
+    sellingPrice: 18500,
+    quantity: 25,
+    safetyStock: 5,
+    unit: 'pièce',
+    type: ProductType.produit,
+    locationId: 'loc_2',
+    imageUrl: _px(2670553),
+  ),
+  Product(
+    id: 'prod_5',
+    name: 'Montre Rolex (réplique)',
+    description: 'Montre analogique métal, cadran sobre, bracelet acier inox.',
+    categoryId: 'cat_3',
+    purchasePrice: 25000,
+    sellingPrice: 45000,
+    quantity: 8,
+    safetyStock: 2,
+    unit: 'pièce',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(2783873),
+  ),
+  Product(
+    id: 'prod_6',
+    name: "Boucles d'oreilles",
+    description: "Paire de boucles pendantes, finition métal doré.",
+    categoryId: 'cat_3',
+    purchasePrice: 3500,
+    sellingPrice: 6000,
+    quantity: 30,
+    safetyStock: 5,
+    unit: 'paire',
+    type: ProductType.produit,
+    locationId: 'loc_2',
+    imageUrl: _px(1020643),
+  ),
+  Product(
+    id: 'prod_7',
+    name: 'Chargeur iPhone',
+    description: "Câble / adaptateur secteur compatible Lightning (Apple).",
+    categoryId: 'cat_4',
+    purchasePrice: 2500,
+    sellingPrice: 4500,
+    quantity: 60,
+    safetyStock: 12,
+    unit: 'pièce',
+    barcode: '190198000285',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(129494),
+  ),
+  Product(
+    id: 'prod_8',
+    name: 'Riz 50kg',
+    description: 'Riz en grain long, sac 50kg pour alimentation et revente.',
+    categoryId: 'cat_5',
+    purchasePrice: 18000,
+    sellingPrice: 22000,
+    quantity: 40,
+    safetyStock: 8,
+    unit: 'sac',
+    type: ProductType.produit,
+    locationId: 'loc_1',
+    imageUrl: _px(2255931),
+  ),
+  Product(
+    id: 'prod_9',
+    name: 'Huile de palme 5L',
+    description: "Huile végétale 5L, bouteille, usage alimentaire et cuisson.",
+    categoryId: 'cat_5',
+    purchasePrice: 4500,
+    sellingPrice: 6000,
+    quantity: 55,
+    safetyStock: 10,
+    unit: 'bidon',
+    type: ProductType.produit,
+    locationId: 'loc_2',
+    imageUrl: _px(1028726),
+  ),
+  Product(
+    id: 'prod_10',
+    name: 'Consultation comptable',
+    description: 'Conseil et révision de dossiers, facturation à l’heure.',
+    categoryId: 'cat_6',
+    purchasePrice: 0,
+    sellingPrice: 50000,
+    quantity: 999,
+    safetyStock: 0,
+    unit: 'heure',
+    type: ProductType.service,
+    locationId: 'loc_1',
+    imageUrl: _px(7688336),
+  ),
+  Product(
+    id: 'prod_11',
+    name: 'Installation réseau',
+    description: 'Câblage, baie, configuration LAN pour petites structures.',
+    categoryId: 'cat_6',
+    purchasePrice: 15000,
+    sellingPrice: 75000,
+    quantity: 999,
+    safetyStock: 0,
+    unit: 'forfait',
+    type: ProductType.service,
+    locationId: 'loc_2',
+    imageUrl: _px(1181244),
+  ),
+];
+
+final List<Invoice> mockInvoices = [
+  Invoice(
+    id: 'inv_1',
+    invoiceNumber: 'FAC-240415001',
+    items: [
+      InvoiceItem(
+          productId: 'prod_1',
+          productName: 'Coca-Cola 33cl',
+          quantity: 6,
+          unitPrice: 500),
+      InvoiceItem(
+          productId: 'prod_3',
+          productName: 'T-shirt Nike',
+          quantity: 2,
+          unitPrice: 8500),
+    ],
+    paymentMethod: PaymentMethod.espece,
+    cashierId: 'user_2',
+    cashierName: 'Marie KOUAM',
+    locationId: 'loc_1',
+    customerName: 'Client Anonyme',
+    createdAt: DateTime(2026, 4, 15, 10, 30),
+  ),
+  Invoice(
+    id: 'inv_2',
+    invoiceNumber: 'FAC-240415002',
+    items: [
+      InvoiceItem(
+          productId: 'prod_5',
+          productName: 'Montre Rolex (réplique)',
+          quantity: 1,
+          unitPrice: 45000),
+    ],
+    paymentMethod: PaymentMethod.carte,
+    status: InvoiceStatus.enAttente,
+    cashierId: 'user_2',
+    cashierName: 'Marie KOUAM',
+    locationId: 'loc_1',
+    customerName: 'M. ESSOMBA',
+    isCredit: true,
+    amountPaid: 20000,
+    createdAt: DateTime(2026, 4, 15, 14, 15),
+  ),
+  Invoice(
+    id: 'inv_3',
+    invoiceNumber: 'FAC-240416001',
+    items: [
+      InvoiceItem(
+          productId: 'prod_2',
+          productName: 'Heineken 33cl',
+          quantity: 12,
+          unitPrice: 900),
+      InvoiceItem(
+          productId: 'prod_8',
+          productName: 'Riz 50kg',
+          quantity: 2,
+          unitPrice: 22000),
+    ],
+    paymentMethod: PaymentMethod.mobile,
+    cashierId: 'user_4',
+    cashierName: 'Aline FOUDA',
+    locationId: 'loc_2',
+    customerName: 'Mme NGOSSO',
+    createdAt: DateTime(2026, 4, 16, 9, 45),
+  ),
+  Invoice(
+    id: 'inv_4',
+    invoiceNumber: 'FAC-240417001',
+    items: [
+      InvoiceItem(
+          productId: 'prod_7',
+          productName: 'Chargeur iPhone',
+          quantity: 3,
+          unitPrice: 4500),
+      InvoiceItem(
+          productId: 'prod_9',
+          productName: 'Huile de palme 5L',
+          quantity: 5,
+          unitPrice: 6000),
+    ],
+    paymentMethod: PaymentMethod.espece,
+    cashierId: 'user_2',
+    cashierName: 'Marie KOUAM',
+    locationId: 'loc_1',
+    createdAt: DateTime(2026, 4, 17, 16, 20),
+  ),
+  Invoice(
+    id: 'inv_5',
+    invoiceNumber: 'FAC-240418001',
+    items: [
+      InvoiceItem(
+          productId: 'prod_10',
+          productName: 'Consultation comptable',
+          quantity: 2,
+          unitPrice: 50000),
+    ],
+    paymentMethod: PaymentMethod.carte,
+    cashierId: 'user_1',
+    cashierName: 'Rostand MOUNGAM',
+    locationId: 'loc_1',
+    customerName: 'SARL CONSTRUCTION',
+    createdAt: DateTime(2026, 4, 18, 11, 0),
+  ),
+];
+
+final List<StockMovement> mockMovements = [
+  StockMovement(
+      productId: 'prod_1',
+      type: MovementType.entree,
+      quantity: 120,
+      previousQuantity: 0,
+      newQuantity: 120,
+      userId: 'user_1',
+      reason: 'Mise en stock initiale',
+      reference: 'BE-001'),
+  StockMovement(
+      productId: 'prod_2',
+      type: MovementType.entree,
+      quantity: 80,
+      previousQuantity: 0,
+      newQuantity: 80,
+      userId: 'user_1',
+      reason: 'Mise en stock initiale',
+      reference: 'BE-001'),
+  StockMovement(
+      productId: 'prod_1',
+      type: MovementType.sortie,
+      quantity: 6,
+      previousQuantity: 120,
+      newQuantity: 114,
+      userId: 'user_2',
+      reason: 'Vente',
+      reference: 'FAC-240415001'),
+  StockMovement(
+      productId: 'prod_3',
+      type: MovementType.sortie,
+      quantity: 2,
+      previousQuantity: 45,
+      newQuantity: 43,
+      userId: 'user_2',
+      reason: 'Vente',
+      reference: 'FAC-240415001'),
+  StockMovement(
+      productId: 'prod_5',
+      type: MovementType.sortie,
+      quantity: 1,
+      previousQuantity: 8,
+      newQuantity: 7,
+      userId: 'user_2',
+      reason: 'Vente',
+      reference: 'FAC-240415002'),
+];
+
+final List<Credit> mockCredits = [
+  Credit(
+      id: 'cred_1',
+      customerName: 'M. ESSOMBA',
+      customerPhone: '237699123456',
+      amount: 45000,
+      amountPaid: 20000,
+      invoiceId: 'inv_2',
+      dueDate: DateTime(2026, 5, 15)),
+  Credit(
+      id: 'cred_2',
+      customerName: 'SARL CONSTRUCTION',
+      customerPhone: '237677987654',
+      amount: 100000,
+      amountPaid: 0,
+      dueDate: DateTime(2026, 5, 30)),
+  Credit(
+      id: 'cred_3',
+      customerName: 'Fournisseur ABC',
+      amount: 250000,
+      amountPaid: 100000,
+      isCustomerCredit: false,
+      dueDate: DateTime(2026, 5, 10)),
+];
+
+final List<Expense> mockExpenses = [
+  Expense(
+      id: 'exp_1',
+      description: 'Loyer boutique Ange Raphaël',
+      amount: 150000,
+      category: 'Loyer',
+      userId: 'user_1',
+      date: DateTime(2026, 4, 1)),
+  Expense(
+      id: 'exp_2',
+      description: 'Electricité',
+      amount: 45000,
+      category: 'Services publics',
+      userId: 'user_1',
+      date: DateTime(2026, 4, 5)),
+  Expense(
+      id: 'exp_3',
+      description: 'Transport marchandises',
+      amount: 35000,
+      category: 'Transport',
+      userId: 'user_3',
+      date: DateTime(2026, 4, 10)),
+];
+
+final List<MonthlyRevenue> mockMonthlyRevenue = [
+  MonthlyRevenue(
+      month: 'Jan',
+      sales: 2450000,
+      credits: 450000,
+      receipts: 1200000,
+      expenses: 890000),
+  MonthlyRevenue(
+      month: 'Fév',
+      sales: 3120000,
+      credits: 380000,
+      receipts: 1500000,
+      expenses: 950000),
+  MonthlyRevenue(
+      month: 'Mar',
+      sales: 2890000,
+      credits: 520000,
+      receipts: 1350000,
+      expenses: 1020000),
+  MonthlyRevenue(
+      month: 'Avr',
+      sales: 3560000,
+      credits: 410000,
+      receipts: 1800000,
+      expenses: 1100000),
+];

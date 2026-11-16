@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Core business collections used by current app repositories.
+    match /products/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /categories/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /invoices/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /users/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /stock_movements/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /locations/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /cash_registers/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /credits/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /expenses/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

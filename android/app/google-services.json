@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "440408700416",
+    "project_id": "omniflow-a1811",
+    "storage_bucket": "omniflow-a1811.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440408700416:android:f5444dc5893c937086cae5",
+        "android_client_info": {
+          "package_name": "com.example.pilotage_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpr8C839IIEh0LJpe7QSEqoR_Y1Z1DyHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
