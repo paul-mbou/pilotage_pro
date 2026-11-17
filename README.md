@@ -1,8 +1,13 @@
 # Pilotage Pro
 
-![Pilotage Pro](docs/portfolio/cover.png)
+<p>
+  <img src="docs/portfolio/login.png" width="220" alt="Connexion Pilotage Pro" />
+  <img src="docs/portfolio/signup.png" width="220" alt="Inscription Pilotage Pro" />
+</p>
 
 Application de caisse et de pilotage pour un commerce : ventes, stock, factures, crédits et plusieurs points de vente, en francs CFA.
+
+These screens are the real login and sign-up flows, captured on an Android emulator from the debug build. The dashboard, register, stock, and reports open after a Firebase sign-in, so they are not shown here.
 
 
 **Pilotage Pro** is a Flutter mobile application for **business management and point of sale (POS)**. It targets shops and small businesses that need to manage products, stock, sales, cash registers, users, and financial reporting from one app. The UI is primarily in **French**, and amounts are oriented toward **XAF (Franc CFA)**.
